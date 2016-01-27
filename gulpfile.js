@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var tmodjs = require('gulp-tmod');
 
 gulp.task('default', function(){
-    return gulp.src(['./src/widget/**/*.html', './src/widget/*.html'])
+    return gulp.src(['./src/page/**/*.html', './src/widget/**/*.html'])
             .pipe(tmodjs({
-                base: './src/widget',
+                base: './src',
                 combo: true,
                 output: './dist'
             }));
