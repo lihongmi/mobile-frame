@@ -1,0 +1,45 @@
+#*
+  this page layout as follow diagram:
+  ----------------------------------------
+  |              hdModules               |
+  ----------------------------------------
+  |  sidebarModules |   mainModules      |
+  ----------------------------------------
+  |              ftModules               |
+  ----------------------------------------
+  ----------------------------------------
+  |            outsideModules            |
+  ----------------------------------------
+*#
+
+<div id="doc">
+    <div id="hd">
+        <!-- head modules -->
+        $!{hdModules}
+        <!-- head modules end -->
+    </div>
+    <div id="bd" class="global-clearfix">
+        <div id="yao-main">
+            <div class="yao-b">
+                <div class="yao-b-min-height">
+                    <!-- main modules -->
+                    $!{mainModules}
+                    <!-- main modules end -->
+                </div>
+            </div>
+        </div>
+        <div class="yao-b">
+            <!-- sidebar modules -->
+            $!{sidebarModules}
+            <!-- sidebar modules end -->
+        </div>
+    </div>
+    <div id="ft">
+        <!-- foot modules -->
+        $!{ftModules}
+        <!-- foot modules end -->
+    </div>
+</div>
+<!-- out of page modules -->
+$!{outsideModules}
+<!-- out of page modules end -->

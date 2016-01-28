@@ -2,7 +2,7 @@ var Velocity = require('velocityjs');
 var fs = require('fs');
 var path = require('path');
 
-var testPath = path.join(__dirname, 'src/page/index.html');
+var testPath = path.join(__dirname, 'src/page/index.conf');
 var str = fs.readFileSync(testPath, 'utf8');
 
 var Compile = Velocity.Compile;
@@ -21,8 +21,17 @@ function getvariable (asts, key) {
                     });
                 } else if (item.equal[1].type === 'map') {
                     value = {};
+                    var temp;
                     for (key in item.equal[1].value) {
-                        value[key] = item.equal[1].value[key].value;
+                        temp = [];
+                        if (item.equal[1].value[key].value.length) {
+                            item.equal[1].value[key].value.forEach(function (vv) {
+                                 temp.push(vv.value);
+                            });
+                            value[key] = temp;
+                        } else {
+                            value[key] = item.equal[1].value[key].value;
+                        }
                     }
                 } else {
                     value = item.equal[1].value;
@@ -33,11 +42,25 @@ function getvariable (asts, key) {
     return value;
 };
 
+var modules = getvariable(asts, 'modules');
 
-console.log(getvariable(asts, 'modules'));
+// 获取路径模板
+var getTpl = function (name) {
+    var baseUrl = path.join(__dirname, 'src/page/widget'),
+        resultPath = path.join(baseUrl, name, name +'.html');
+    return fs.readFileSync(resultPath, 'utf8');
+};
+
+console.log(getTpl('header'));
+// var modulesArray = 
+
+// console.log(modules);
+
+
 var macros = {
-  include: function(str){
+  include: function(str) {
     var content = fs.readFileSync(path.join(__dirname, 'src', str), 'utf8');
     return content;
   }
 };
+
