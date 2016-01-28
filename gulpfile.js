@@ -6,6 +6,7 @@ gulp.task('default', function(){
             .pipe(tmodjs({
                 base: './src',
                 combo: true,
-                output: './dist'
+                output: './dist',
+                compress: false
             }));
 });

@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "gulp-tmod": "^1.0.3",
+    "gulp-velocity": "0.0.2",
     "tmodjs": "^1.0.3",
     "velocity": "^0.7.2",
     "velocityjs": "^0.7.5",
