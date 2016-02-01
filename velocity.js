@@ -46,15 +46,23 @@ var modules = getvariable(asts, 'modules');
 
 // 获取路径模板
 var getTpl = function (name) {
-    var baseUrl = path.join(__dirname, 'src/page/widget'),
+    var baseUrl = path.join(__dirname, 'src/widget'),
         resultPath = path.join(baseUrl, name, name +'.html');
     return fs.readFileSync(resultPath, 'utf8');
 };
 
 console.log(getTpl('header'));
-// var modulesArray = 
-
-// console.log(modules);
+var replaceModuleToTpl = function (modules) {
+    var key, newTpl = {};
+    for (key in modules) {
+        newTpl[key] = '';
+        modules[key].forEach(function (item) {
+            newTpl[key] += getTpl(item);
+        });
+    }
+    return newTpl;
+};
+console.log(replaceModuleToTpl(modules));
 
 
 var macros = {
