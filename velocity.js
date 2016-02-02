@@ -51,7 +51,6 @@ var getTpl = function (name) {
     return fs.readFileSync(resultPath, 'utf8');
 };
 
-console.log(getTpl('header'));
 var replaceModuleToTpl = function (modules) {
     var key, newTpl = {};
     for (key in modules) {
@@ -62,9 +61,18 @@ var replaceModuleToTpl = function (modules) {
     }
     return newTpl;
 };
-console.log(replaceModuleToTpl(modules));
+// console.log(replaceModuleToTpl(modules));
+var modulesData = replaceModuleToTpl(modules);
 
+var htmlTpl = fs.readFileSync(path.join(__dirname, 'src/layout/layout2/layout2.html'), 'utf8');
 
+var asts_html = Velocity.parse(htmlTpl);
+var config_html = {
+    escape : false
+}; 
+var xx = (new Compile(asts_html, config_html)).render(modulesData);
+
+console.log(xx);
 var macros = {
   include: function(str) {
     var content = fs.readFileSync(path.join(__dirname, 'src', str), 'utf8');
