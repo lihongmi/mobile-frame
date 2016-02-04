@@ -61,7 +61,6 @@ var replaceModuleToTpl = function (modules) {
     }
     return newTpl;
 };
-// console.log(replaceModuleToTpl(modules));
 var modulesData = replaceModuleToTpl(modules);
 
 var htmlTpl = fs.readFileSync(path.join(__dirname, 'src/layout/layout2/layout2.html'), 'utf8');
@@ -70,9 +69,22 @@ var asts_html = Velocity.parse(htmlTpl);
 var config_html = {
     escape : false
 }; 
-var xx = (new Compile(asts_html, config_html)).render(modulesData);
+var mainHtml = (new Compile(asts_html, config_html)).render(modulesData);
 
-console.log(xx);
+var pageConf = {};
+pageConf.mainHtml = mainHtml;
+
+var pageTpl = fs.readFileSync(path.join(__dirname, 'src/layout/tpl.html'), 'utf8')
+
+var page_html = Velocity.parse(pageTpl);
+var config_page = {
+    escape : false
+}; 
+
+var endHtml = (new Compile(page_html, config_page)).render(pageConf);
+
+console.log(endHtml);
+
 var macros = {
   include: function(str) {
     var content = fs.readFileSync(path.join(__dirname, 'src', str), 'utf8');
