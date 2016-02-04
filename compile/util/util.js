@@ -1,3 +1,5 @@
+var path = require('path');
+var fs = require('fs');
 var util = {
     // 获取页面velocity变量
     getvariable: function (asts, key) {
@@ -35,6 +37,15 @@ var util = {
     getPageConf: function (pagename) {
         var pagePath = path.join(__dirname, '../../src/page', pagename + '.conf');
         return fs.readFileSync(pagePath, 'utf8');
+    },
+    getSortModulesArr: function (modules) {
+        var key, arr = [];
+        for (key in modules) {
+            modules[key].forEach(function (item) {
+                arr.push(item);
+            });
+        }
+        return arr;
     }
 };
 
