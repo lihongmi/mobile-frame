@@ -27,6 +27,7 @@ var outputCssString = function (pagename) {
     for (i = 0; i < cssArr.length; i++) {
         cssArr[i] = util.format(cssTpl, cssArr[i]);
     }
+    return cssArr.join('');
 };
 
 module.exports = outputCssString;

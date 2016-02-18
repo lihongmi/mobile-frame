@@ -37,12 +37,12 @@ var outputTplString = function (pagename) {
     var layout = $$util.getvariable(asts, 'layout');
 
     var layoutTpl = fs.readFileSync(path.join(__dirname, '../../src/layout', layout, layout + '.html'), 'utf8');
-
     var asts_html = Velocity.parse(layoutTpl);
     var config_html = {
         escape : false
     }; 
     var mainHtml = (new Compile(asts_html, config_html)).render(modulesTplData);
+    return mainHtml;
 };
 
 module.exports = outputTplString;
