@@ -40,7 +40,7 @@
             forEach: S.each,
             some: S.some,
             mixin: S.extend,
-            guid: S.guid,
+            guid: S.uniqueId,
             isArray: S.isArray,
             indexOf: S.indexOf,
             // 1.2没有keys方法，考虑独立utils
